@@ -1,0 +1,146 @@
+apiVersion: v1
+items:
+- apiVersion: image.openshift.io/v1
+  kind: ImageStream
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewBuild
+      openshift.io/image.dockerRepositoryCheck: 2018-09-28T04:12:30Z
+    creationTimestamp: 2018-09-28T04:12:27Z
+    generation: 2
+    labels:
+      build: alpine-rsync
+    name: alpine
+    namespace: web
+    resourceVersion: "229374"
+    selfLink: /apis/image.openshift.io/v1/namespaces/web/imagestreams/alpine
+    uid: b5e7dff2-c2d4-11e8-8302-92ebaba5994f
+  spec:
+    lookupPolicy:
+      local: false
+    tags:
+    - annotations:
+        openshift.io/imported-from: alpine
+      from:
+        kind: DockerImage
+        name: alpine
+      generation: 2
+      importPolicy: {}
+      name: latest
+      referencePolicy:
+        type: Source
+  status:
+    dockerImageRepository: 172.30.1.1:5000/web/alpine
+    tags:
+    - items:
+      - created: 2018-09-28T04:12:30Z
+        dockerImageReference: alpine@sha256:02892826401a9d18f0ea01f8a2f35d328ef039db4e1edcc45c630314a0457d5b
+        generation: 2
+        image: sha256:02892826401a9d18f0ea01f8a2f35d328ef039db4e1edcc45c630314a0457d5b
+      tag: latest
+- apiVersion: image.openshift.io/v1
+  kind: ImageStream
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewBuild
+    creationTimestamp: 2018-09-28T04:12:27Z
+    generation: 1
+    labels:
+      build: alpine-rsync
+    name: alpine-rsync
+    namespace: web
+    resourceVersion: "229415"
+    selfLink: /apis/image.openshift.io/v1/namespaces/web/imagestreams/alpine-rsync
+    uid: b5feeda1-c2d4-11e8-8302-92ebaba5994f
+  spec:
+    lookupPolicy:
+      local: false
+  status:
+    dockerImageRepository: 172.30.1.1:5000/web/alpine-rsync
+    tags:
+    - items:
+      - created: 2018-09-28T04:12:38Z
+        dockerImageReference: 172.30.1.1:5000/web/alpine-rsync@sha256:fd931574b454767aed6955621657f1faa72f3a33d0a7f924b47d360b49642a69
+        generation: 1
+        image: sha256:fd931574b454767aed6955621657f1faa72f3a33d0a7f924b47d360b49642a69
+      tag: latest
+- apiVersion: image.openshift.io/v1
+  kind: ImageStream
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewApp
+      openshift.io/image.dockerRepositoryCheck: 2018-09-28T05:15:53Z
+    creationTimestamp: 2018-09-28T05:15:51Z
+    generation: 2
+    labels:
+      app: db
+    name: db
+    namespace: web
+    resourceVersion: "236004"
+    selfLink: /apis/image.openshift.io/v1/namespaces/web/imagestreams/db
+    uid: 911d2d2f-c2dd-11e8-8302-92ebaba5994f
+  spec:
+    lookupPolicy:
+      local: false
+    tags:
+    - annotations:
+        openshift.io/imported-from: docker.io/postgres:9.4
+      from:
+        kind: DockerImage
+        name: docker.io/postgres:9.4
+      generation: 2
+      importPolicy: {}
+      name: "9.4"
+      referencePolicy:
+        type: Source
+  status:
+    dockerImageRepository: 172.30.1.1:5000/web/db
+    tags:
+    - items:
+      - created: 2018-09-28T05:15:53Z
+        dockerImageReference: docker.io/postgres@sha256:2b1bd281c5e3a5d4d86527443b4defb9a36165112889480acec260b8d8364102
+        generation: 2
+        image: sha256:2b1bd281c5e3a5d4d86527443b4defb9a36165112889480acec260b8d8364102
+      tag: "9.4"
+- apiVersion: image.openshift.io/v1
+  kind: ImageStream
+  metadata:
+    annotations:
+      openshift.io/image.dockerRepositoryCheck: 2018-09-28T04:01:10Z
+    creationTimestamp: 2018-09-28T04:01:07Z
+    generation: 2
+    labels:
+      app: run9
+    name: run9
+    namespace: web
+    resourceVersion: "228151"
+    selfLink: /apis/image.openshift.io/v1/namespaces/web/imagestreams/run9
+    uid: 20bc2cdb-c2d3-11e8-8302-92ebaba5994f
+  spec:
+    lookupPolicy:
+      local: false
+    tags:
+    - annotations:
+        openshift.io/generated-by: OpenShiftWebConsole
+        openshift.io/imported-from: odoo:11.0
+      from:
+        kind: DockerImage
+        name: odoo:11.0
+      generation: 2
+      importPolicy: {}
+      name: "11.0"
+      referencePolicy:
+        type: Source
+  status:
+    dockerImageRepository: 172.30.1.1:5000/web/run9
+    tags:
+    - items:
+      - created: 2018-09-28T04:01:10Z
+        dockerImageReference: odoo@sha256:f99fcab1dfb31bb247c6942fbeeb05468638369b9ebecbb126a9595fe5cddca1
+        generation: 2
+        image: sha256:f99fcab1dfb31bb247c6942fbeeb05468638369b9ebecbb126a9595fe5cddca1
+      tag: "11.0"
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""

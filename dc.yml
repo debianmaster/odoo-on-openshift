@@ -1,0 +1,306 @@
+apiVersion: v1
+items:
+- apiVersion: apps.openshift.io/v1
+  kind: DeploymentConfig
+  metadata:
+    creationTimestamp: 2018-09-28T04:47:40Z
+    generation: 13
+    labels:
+      run: alpine-rsync
+    name: alpine-rsync
+    namespace: web
+    resourceVersion: "238490"
+    selfLink: /apis/apps.openshift.io/v1/namespaces/web/deploymentconfigs/alpine-rsync
+    uid: a108747c-c2d9-11e8-8302-92ebaba5994f
+  spec:
+    replicas: 0
+    revisionHistoryLimit: 10
+    selector:
+      run: alpine-rsync
+    strategy:
+      activeDeadlineSeconds: 21600
+      resources: {}
+      rollingParams:
+        intervalSeconds: 1
+        maxSurge: 25%
+        maxUnavailable: 25%
+        timeoutSeconds: 600
+        updatePeriodSeconds: 1
+      type: Rolling
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          run: alpine-rsync
+      spec:
+        containers:
+        - args:
+          - sleep
+          - "10000"
+          image: 172.30.1.1:5000/web/alpine-rsync
+          imagePullPolicy: Always
+          name: alpine-rsync
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /data
+            name: volume-gan7c
+          - mountPath: /odoo
+            name: volume-mll9a
+          - mountPath: /extra-addons
+            name: volume-2jd4f
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: volume-gan7c
+          persistentVolumeClaim:
+            claimName: web-db
+        - name: volume-mll9a
+          persistentVolumeClaim:
+            claimName: odoo
+        - name: volume-2jd4f
+          persistentVolumeClaim:
+            claimName: extra-addons
+    test: false
+    triggers:
+    - type: ConfigChange
+  status:
+    availableReplicas: 0
+    conditions:
+    - lastTransitionTime: 2018-09-28T05:31:27Z
+      lastUpdateTime: 2018-09-28T05:31:27Z
+      message: replication controller "alpine-rsync-4" successfully rolled out
+      reason: NewReplicationControllerAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: 2018-09-28T05:35:41Z
+      lastUpdateTime: 2018-09-28T05:35:41Z
+      message: Deployment config does not have minimum availability.
+      status: "False"
+      type: Available
+    details:
+      causes:
+      - type: ConfigChange
+      message: config change
+    latestVersion: 4
+    observedGeneration: 13
+    replicas: 0
+    unavailableReplicas: 0
+    updatedReplicas: 0
+- apiVersion: apps.openshift.io/v1
+  kind: DeploymentConfig
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewApp
+    creationTimestamp: 2018-09-28T05:15:51Z
+    generation: 13
+    labels:
+      app: db
+    name: db
+    namespace: web
+    resourceVersion: "237061"
+    selfLink: /apis/apps.openshift.io/v1/namespaces/web/deploymentconfigs/db
+    uid: 912d330e-c2dd-11e8-8302-92ebaba5994f
+  spec:
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      app: db
+      deploymentconfig: db
+    strategy:
+      activeDeadlineSeconds: 21600
+      resources: {}
+      rollingParams:
+        intervalSeconds: 1
+        maxSurge: 25%
+        maxUnavailable: 25%
+        timeoutSeconds: 600
+        updatePeriodSeconds: 1
+      type: Rolling
+    template:
+      metadata:
+        annotations:
+          openshift.io/generated-by: OpenShiftNewApp
+        creationTimestamp: null
+        labels:
+          app: db
+          deploymentconfig: db
+      spec:
+        containers:
+        - env:
+          - name: POSTGRES_PASSWORD
+            value: odoo
+          - name: POSTGRES_USER
+            value: odoo
+          - name: PGDATA
+            value: /var/lib/postgresql/data
+          image: docker.io/postgres@sha256:2b1bd281c5e3a5d4d86527443b4defb9a36165112889480acec260b8d8364102
+          imagePullPolicy: IfNotPresent
+          name: db
+          ports:
+          - containerPort: 5432
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /var/lib/postgresql/data
+            name: volume-23ark
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: volume-23ark
+          persistentVolumeClaim:
+            claimName: web-db
+    test: false
+    triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+        - db
+        from:
+          kind: ImageStreamTag
+          name: db:9.4
+          namespace: web
+        lastTriggeredImage: docker.io/postgres@sha256:2b1bd281c5e3a5d4d86527443b4defb9a36165112889480acec260b8d8364102
+      type: ImageChange
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: 2018-09-28T05:19:03Z
+      lastUpdateTime: 2018-09-28T05:19:03Z
+      message: replication controller "db-4" successfully rolled out
+      reason: NewReplicationControllerAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: 2018-09-28T05:23:42Z
+      lastUpdateTime: 2018-09-28T05:23:42Z
+      message: Deployment config has minimum availability.
+      status: "True"
+      type: Available
+    details:
+      causes:
+      - type: ConfigChange
+      message: config change
+    latestVersion: 4
+    observedGeneration: 13
+    readyReplicas: 1
+    replicas: 1
+    unavailableReplicas: 0
+    updatedReplicas: 1
+- apiVersion: apps.openshift.io/v1
+  kind: DeploymentConfig
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftWebConsole
+    creationTimestamp: 2018-09-28T04:01:07Z
+    generation: 12
+    labels:
+      app: run9
+    name: run9
+    namespace: web
+    resourceVersion: "238521"
+    selfLink: /apis/apps.openshift.io/v1/namespaces/web/deploymentconfigs/run9
+    uid: 20bcc3af-c2d3-11e8-8302-92ebaba5994f
+  spec:
+    replicas: 1
+    selector:
+      app: run9
+      deploymentconfig: run9
+    strategy:
+      activeDeadlineSeconds: 21600
+      resources: {}
+      rollingParams:
+        intervalSeconds: 1
+        maxSurge: 25%
+        maxUnavailable: 25%
+        timeoutSeconds: 600
+        updatePeriodSeconds: 1
+      type: Rolling
+    template:
+      metadata:
+        annotations:
+          openshift.io/generated-by: OpenShiftWebConsole
+        creationTimestamp: null
+        labels:
+          app: run9
+          deploymentconfig: run9
+      spec:
+        containers:
+        - image: odoo@sha256:f99fcab1dfb31bb247c6942fbeeb05468638369b9ebecbb126a9595fe5cddca1
+          imagePullPolicy: IfNotPresent
+          name: run9
+          ports:
+          - containerPort: 8069
+            protocol: TCP
+          - containerPort: 8071
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /mnt/extra-addons
+            name: volume-vn9wx
+          - mountPath: /var/lib/odoo
+            name: volume-4svb3
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: volume-vn9wx
+          persistentVolumeClaim:
+            claimName: extra-addons
+        - name: volume-4svb3
+          persistentVolumeClaim:
+            claimName: odoo
+    test: false
+    triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+        - run9
+        from:
+          kind: ImageStreamTag
+          name: run9:11.0
+          namespace: web
+        lastTriggeredImage: odoo@sha256:f99fcab1dfb31bb247c6942fbeeb05468638369b9ebecbb126a9595fe5cddca1
+      type: ImageChange
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: 2018-09-28T05:28:27Z
+      lastUpdateTime: 2018-09-28T05:28:28Z
+      message: replication controller "run9-5" successfully rolled out
+      reason: NewReplicationControllerAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: 2018-09-28T05:35:48Z
+      lastUpdateTime: 2018-09-28T05:35:48Z
+      message: Deployment config has minimum availability.
+      status: "True"
+      type: Available
+    details:
+      causes:
+      - type: ConfigChange
+      message: config change
+    latestVersion: 5
+    observedGeneration: 12
+    readyReplicas: 1
+    replicas: 1
+    unavailableReplicas: 0
+    updatedReplicas: 1
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""

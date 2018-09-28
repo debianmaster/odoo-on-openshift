@@ -1,0 +1,53 @@
+apiVersion: v1
+items:
+- apiVersion: build.openshift.io/v1
+  kind: BuildConfig
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewBuild
+    creationTimestamp: 2018-09-28T04:12:27Z
+    labels:
+      build: alpine-rsync
+    name: alpine-rsync
+    namespace: web
+    resourceVersion: "229375"
+    selfLink: /apis/build.openshift.io/v1/namespaces/web/buildconfigs/alpine-rsync
+    uid: b6145940-c2d4-11e8-8302-92ebaba5994f
+  spec:
+    failedBuildsHistoryLimit: 5
+    nodeSelector: null
+    output:
+      to:
+        kind: ImageStreamTag
+        name: alpine-rsync:latest
+    postCommit: {}
+    resources: {}
+    runPolicy: Serial
+    source:
+      git:
+        uri: https://github.com/netroby/alpine-rsync
+      type: Git
+    strategy:
+      dockerStrategy:
+        from:
+          kind: ImageStreamTag
+          name: alpine:latest
+      type: Docker
+    successfulBuildsHistoryLimit: 5
+    triggers:
+    - github:
+        secret: 0f9qAx6esejFQgaLRBu8
+      type: GitHub
+    - generic:
+        secret: AjuMRBJJ55JCorAjLZxa
+      type: Generic
+    - type: ConfigChange
+    - imageChange:
+        lastTriggeredImageID: alpine@sha256:02892826401a9d18f0ea01f8a2f35d328ef039db4e1edcc45c630314a0457d5b
+      type: ImageChange
+  status:
+    lastVersion: 1
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""

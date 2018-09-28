@@ -1,0 +1,66 @@
+apiVersion: v1
+items:
+- apiVersion: route.openshift.io/v1
+  kind: Route
+  metadata:
+    annotations:
+      openshift.io/host.generated: "true"
+    creationTimestamp: 2018-09-28T04:01:17Z
+    labels:
+      app: run9
+    name: run9
+    namespace: web
+    resourceVersion: "228195"
+    selfLink: /apis/route.openshift.io/v1/namespaces/web/routes/run9
+    uid: 268be147-c2d3-11e8-8302-92ebaba5994f
+  spec:
+    host: run9-web.apps.stg.run9.io
+    port:
+      targetPort: 8069-tcp
+    to:
+      kind: Service
+      name: run9
+      weight: 100
+    wildcardPolicy: None
+  status:
+    ingress:
+    - conditions:
+      - lastTransitionTime: 2018-09-28T04:01:17Z
+        status: "True"
+        type: Admitted
+      host: run9-web.apps.stg.run9.io
+      routerName: router
+      wildcardPolicy: None
+- apiVersion: route.openshift.io/v1
+  kind: Route
+  metadata:
+    creationTimestamp: 2018-09-28T04:02:22Z
+    labels:
+      app: run9
+    name: run9-dev
+    namespace: web
+    resourceVersion: "228296"
+    selfLink: /apis/route.openshift.io/v1/namespaces/web/routes/run9-dev
+    uid: 4d2a6190-c2d3-11e8-8302-92ebaba5994f
+  spec:
+    host: web.stg.run9.io
+    port:
+      targetPort: 8069-tcp
+    to:
+      kind: Service
+      name: run9
+      weight: 100
+    wildcardPolicy: None
+  status:
+    ingress:
+    - conditions:
+      - lastTransitionTime: 2018-09-28T04:02:22Z
+        status: "True"
+        type: Admitted
+      host: web.stg.run9.io
+      routerName: router
+      wildcardPolicy: None
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""

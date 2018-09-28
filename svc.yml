@@ -1,0 +1,63 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewApp
+    creationTimestamp: 2018-09-28T05:15:51Z
+    labels:
+      app: db
+    name: db
+    namespace: web
+    resourceVersion: "235998"
+    selfLink: /api/v1/namespaces/web/services/db
+    uid: 91358fcf-c2dd-11e8-8302-92ebaba5994f
+  spec:
+    clusterIP: 172.30.72.22
+    ports:
+    - name: 5432-tcp
+      port: 5432
+      protocol: TCP
+      targetPort: 5432
+    selector:
+      app: db
+      deploymentconfig: db
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftWebConsole
+    creationTimestamp: 2018-09-28T04:01:07Z
+    labels:
+      app: run9
+    name: run9
+    namespace: web
+    resourceVersion: "228143"
+    selfLink: /api/v1/namespaces/web/services/run9
+    uid: 20c27386-c2d3-11e8-8302-92ebaba5994f
+  spec:
+    clusterIP: 172.30.45.255
+    ports:
+    - name: 8069-tcp
+      port: 8069
+      protocol: TCP
+      targetPort: 8069
+    - name: 8071-tcp
+      port: 8071
+      protocol: TCP
+      targetPort: 8071
+    selector:
+      deploymentconfig: run9
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""
